@@ -1,3 +1,4 @@
+using App2.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
@@ -93,6 +94,11 @@ namespace App2
                 NavView.Header = ((NavigationViewItem)NavView.SelectedItem)?.
                                                         Content?.ToString();
             }
+        }
+
+        public static implicit operator MainWindow(MainViewModel v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

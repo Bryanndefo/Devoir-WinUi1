@@ -1,3 +1,5 @@
+using App2.Data;
+using App2.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -27,7 +29,12 @@ namespace App2.View
         public Clients()
         {
             this.InitializeComponent();
-            ViewModel = new MainWindow();
+            ViewModel = new MainViewModel(new ClientDataProvider());
+            root.Loaded += Root_Loaded;
+        }
+
+        private void Root_Loaded(object sender, RoutedEventArgs e)
+        {
         }
     }
 }
