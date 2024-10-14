@@ -35,6 +35,12 @@ namespace App2.View
 
         private void Root_Loaded(object sender, RoutedEventArgs e)
         {
+            
+        }
+
+        private void VoirAjout(object sender, RoutedEventArgs e)
+        {
+       
         }
     }
 }

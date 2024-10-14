@@ -9,13 +9,21 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid x:Name="principal" RowSpacing="12" Margin="15 15 0 0">
+        <Grid x:Name="Clients">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+        </Grid>
+    </Grid>
+    <!--<Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Header -->
+        --><!-- Header --><!--
         <StackPanel Orientation="Horizontal" Background="#FFDDDDDD" Padding="10">
             <TextBlock Text="Chez Tartine" FontWeight="Bold" FontSize="16" Margin="0,0,10,0"/>
         </StackPanel>
@@ -28,12 +36,13 @@
             <Button Content="Ventes" Margin="5" />
         </StackPanel>
 
-        <!-- Content Area -->
+        --><!-- Content Area --><!--
         <StackPanel Grid.Row="1" Margin="10">
             <TextBlock Text="Clients - statistiques" FontWeight="Bold" FontSize="14" Margin="0,0,0,10"/>
             <Button Content="Ajouter" HorizontalAlignment="Right" Margin="0,0,0,10"/>
 
-            <!-- Client Information -->
+            --><!-- Client Information --><!--
+            
             <Grid x:Name="root">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
@@ -65,5 +74,5 @@
                 </Border>
             </Grid>
         </StackPanel>
-    </Grid>
+    </Grid>-->
 </Page>

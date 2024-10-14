@@ -16,14 +16,11 @@ namespace App2
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        public MainViewModel ViewModel { get;}
+
         public MainWindow()
         {
             this.InitializeComponent();
-        }
-
-        private void StackPanel_ContextCanceled(UIElement sender, RoutedEventArgs args)
-        {
-
         }
 
         private void ContentFrame_NavigationFailed(
@@ -37,7 +34,7 @@ namespace App2
         {
             ContentFrame.Navigated += On_Navigated;
             // Au chargement de la page, charger la première page du menu
-            NavView.SelectedItem = NavView.MenuItems[0];
+            NavView.SelectedItem = NavView.MenuItems[3];
         }
 
         private void NavView_SelectionChanged(
