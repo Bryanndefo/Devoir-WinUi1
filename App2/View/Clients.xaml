@@ -5,25 +5,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:App2.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="using:App2.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ViewModelBase}"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid x:Name="principal" RowSpacing="12" Margin="15 15 0 0">
-        <Grid x:Name="Clients">
+    <!--<Grid x:Name="principal" RowSpacing="12" Margin="15 15 0 0">
+        <Grid x:Name="listeClients">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
         </Grid>
-    </Grid>
-    <!--<Grid>
+    </Grid>-->
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        --><!-- Header --><!--
+        <!-- Header -->
         <StackPanel Orientation="Horizontal" Background="#FFDDDDDD" Padding="10">
             <TextBlock Text="Chez Tartine" FontWeight="Bold" FontSize="16" Margin="0,0,10,0"/>
         </StackPanel>
@@ -36,13 +36,13 @@
             <Button Content="Ventes" Margin="5" />
         </StackPanel>
 
-        --><!-- Content Area --><!--
+        <!-- Area -->
         <StackPanel Grid.Row="1" Margin="10">
             <TextBlock Text="Clients - statistiques" FontWeight="Bold" FontSize="14" Margin="0,0,0,10"/>
             <Button Content="Ajouter" HorizontalAlignment="Right" Margin="0,0,0,10"/>
 
-            --><!-- Client Information --><!--
-            
+            <!-- Client Information -->
+
             <Grid x:Name="root">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
@@ -74,5 +74,5 @@
                 </Border>
             </Grid>
         </StackPanel>
-    </Grid>-->
+    </Grid>
 </Page>

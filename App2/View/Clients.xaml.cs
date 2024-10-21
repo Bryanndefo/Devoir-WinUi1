@@ -25,7 +25,7 @@ namespace App2.View
     /// </summary>
     public sealed partial class Clients : Page
     {
-        public MainWindow ViewModel { get;  }
+        public MainViewModel ViewModel { get;  }
         public Clients()
         {
             this.InitializeComponent();

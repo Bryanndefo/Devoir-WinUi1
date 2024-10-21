@@ -28,7 +28,7 @@
                 <NavigationViewItem Tag="Interface_magasin.View.Inventaire" Content="Inventaire"/>
                 <NavigationViewItem Tag="Interface_magasin.View.Recettes" Content="Recettes"/>
                 <NavigationViewItem Tag="Interface_magasin.View.Ingrédients" Content="Ingrédients"/>
-                <NavigationViewItem Tag="Interface_magasin.View.Clients" Content="Clients"/>
+                <NavigationViewItem Tag="App2.View.Clients" Content="Clients"/>
                 <NavigationViewItem Tag="Interface_magasin.View.Ventes" Content="Ventes"/>
             </NavigationView.MenuItems>
 
