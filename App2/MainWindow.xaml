@@ -25,11 +25,11 @@
             </NavigationView.Resources>
 
             <NavigationView.MenuItems>
-                <NavigationViewItem Tag="Interface_magasin.View.Inventaire" Content="Inventaire"/>
-                <NavigationViewItem Tag="Interface_magasin.View.Recettes" Content="Recettes"/>
-                <NavigationViewItem Tag="Interface_magasin.View.Ingrédients" Content="Ingrédients"/>
+                <NavigationViewItem Tag="App2.View.Inventaire" Content="Inventaire"/>
+                <NavigationViewItem Tag="App2.View.Recettes" Content="Recettes"/>
+                <NavigationViewItem Tag="App2.View.Ingrédients" Content="Ingrédients"/>
                 <NavigationViewItem Tag="App2.View.Clients" Content="Clients"/>
-                <NavigationViewItem Tag="Interface_magasin.View.Ventes" Content="Ventes"/>
+                <NavigationViewItem Tag="App2.View.Ventes" Content="Ventes"/>
             </NavigationView.MenuItems>
 
             <Frame x:Name="ContentFrame" NavigationFailed="ContentFrame_NavigationFailed"/>
@@ -37,31 +37,4 @@
         </NavigationView>
 
     </Grid>
-
-    <!--<Window x:Class="ChezTartine.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Chez Tartine" Height="450" Width="350">-->
-
-
-
-    <!--<StackPanel Grid.Row="0" Grid.ColumnSpan="4" >
-            <Border BorderThickness="2" BorderBrush="Black">
-                <TextBlock Text="Chez Tartine" FontFamily="Arial" FontSize="25"/>
-            </Border>
-        </StackPanel>
-
-        <StackPanel x:Name="Menu" Grid.Row="1" Grid.ColumnSpan="4" Orientation="Horizontal" Margin="10">
-            <Border BorderThickness="2" BorderBrush="Black">
-                <ListView>
-                    <Button x:Name="Inventaire" Content="Inventaire" Margin="0 10 0 10"/>
-                    <Button x:Name="Recettes" Content="Inventaire" Margin="0 10 0 10" />
-                    <Button x:Name="Ingredients" Content="Inventaire" Margin="0 10 0 10"/>
-                    <Button x:Name="Clients" Content="Inventaire" Margin="0 10 0 10"/>
-                    <Button x:Name="Ventes" Content="Inventaire" Margin="0 10 0 10"/>
-                </ListView>
-
-            </Border>
-        </StackPanel>
-    </Grid>-->
 </Window>

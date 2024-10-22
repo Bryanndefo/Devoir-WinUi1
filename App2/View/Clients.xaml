@@ -9,70 +9,29 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <!--<Grid x:Name="principal" RowSpacing="12" Margin="15 15 0 0">
+    <!--Definition de la Grid Principale-->
+    <Grid x:Name="root" RowSpacing="12" Margin="15 12 0 0" Background="red" >
+        
+        
         <Grid x:Name="listeClients">
+            <!--La premier rangée prends la hauteur automatique dependamanent de son contenu
+            La deuxieme rangée prends la hauteur dependament de l'espace qui reste-->
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-        </Grid>
-    </Grid>-->
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
 
-        <!-- Header -->
-        <StackPanel Orientation="Horizontal" Background="#FFDDDDDD" Padding="10">
-            <TextBlock Text="Chez Tartine" FontWeight="Bold" FontSize="16" Margin="0,0,10,0"/>
-        </StackPanel>
-
-        <StackPanel Orientation="Horizontal" Padding="0 40 0 0 " >
-            <Button Content="Inventaire" Margin="5" />
-            <Button Content="Recettes" Margin="5" />
-            <Button Content="Ingrédients" Margin="5" />
-            <Button Content="Clients" Margin="5" />
-            <Button Content="Ventes" Margin="5" />
-        </StackPanel>
-
-        <!-- Area -->
-        <StackPanel Grid.Row="1" Margin="10">
-            <TextBlock Text="Clients - statistiques" FontWeight="Bold" FontSize="14" Margin="0,0,0,10"/>
-            <Button Content="Ajouter" HorizontalAlignment="Right" Margin="0,0,0,10"/>
-
-            <!-- Client Information -->
-
-            <Grid x:Name="root">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
-                </Grid.RowDefinitions>
-                <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1" Margin="0,0,400,10" Padding="10 10 10 10">
-                    <StackPanel>
-                        <TextBlock Text="{x:Bind}"/>
-                        <TextBlock Text="Client depuis: 1970" />
-                        <TextBlock Text="Tarte préférée: Farlouche" />
-                    </StackPanel>
-                </Border>
-
-                <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1" Margin="250,0,150,10" Padding="10">
-                    <StackPanel>
-                        <TextBlock Text="23456 - Cécile Encieux" FontWeight="Bold"/>
-                        <TextBlock Text="Client depuis: 1982" />
-                        <TextBlock Text="Tarte préférée: Fraises" />
-                    </StackPanel>
-                </Border>
-
-                <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" Margin="0,0,400,10" Padding="10 10 10 10">
-                    <StackPanel>
-                        <TextBlock Text="34567 - Justin Pittepeux" FontWeight="Bold"/>
-                        <TextBlock Text="Client depuis: 2022" />
-                        <TextBlock Text="Tarte préférée: Sucre" />
-                    </StackPanel>
-                </Border>
+            <!--Cette grid sera placé dans la premiere rangée de la grid principal
+            Ses colonnes auront une distance de 12 pixel entre elles-->
+            <Grid Grid.Row="0" ColumnSpacing="15" >
+                <!--La premier colonne prends la hauteur automatique dependamanent de son contenu
+                La deuxieme colonne prends la hauteur dependament de l'espace qui reste-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock FontSize="24" Grid.Column="0">Clients-Statistiques</TextBlock>
+                <Button Grid.Column="1" Click="VoirAjout">Ajouter</Button>
             </Grid>
-        </StackPanel>
-    </Grid>
+        </Grid>
 </Page>
