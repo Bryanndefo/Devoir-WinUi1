@@ -25,7 +25,7 @@ namespace App2.View
     /// </summary>
     public sealed partial class Clients : Page
     {
-        public MainViewModel ViewModel { get;  }
+        public MainViewModel ViewModel { get; }
         public Clients()
         {
             this.InitializeComponent();
@@ -35,12 +35,21 @@ namespace App2.View
 
         private void Root_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            ViewModel.ChargerDonnees();
         }
 
         private void VoirAjout(object sender, RoutedEventArgs e)
         {
-       
+            ViewModel.AjouterClient();
+            this.listeClients.Visibility = Visibility.Collapsed;
+            this.ajout.Visibility = Visibility.Visible;
+        }
+
+        private void AjouterClient(object sender, RoutedEventArgs e)
+        {
+            ViewModel.AjouterClient();
+            this.listeClients.Visibility = Visibility.Visible;
+            this.ajout.Visibility = Visibility.Collapsed;
         }
     }
 }

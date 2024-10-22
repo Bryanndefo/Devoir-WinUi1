@@ -33,7 +33,7 @@ namespace App2.ViewModels
             }
         }
 
-        public void ChargerDonnes()
+        public void ChargerDonnees()
         {
             ChargerClients();
         }

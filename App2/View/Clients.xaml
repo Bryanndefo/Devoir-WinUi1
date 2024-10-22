@@ -10,9 +10,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <!--Definition de la Grid Principale-->
-    <Grid x:Name="root" RowSpacing="12" Margin="15 12 0 0" Background="red" >
-        
-        
+    <Grid x:Name="root" RowSpacing="12" Margin="15 12 0 0">
+
+
         <Grid x:Name="listeClients">
             <!--La premier rangée prends la hauteur automatique dependamanent de son contenu
             La deuxieme rangée prends la hauteur dependament de l'espace qui reste-->
@@ -23,7 +23,7 @@
 
             <!--Cette grid sera placé dans la premiere rangée de la grid principal
             Ses colonnes auront une distance de 12 pixel entre elles-->
-            <Grid Grid.Row="0" ColumnSpacing="15" >
+            <Grid Grid.Row="0" ColumnSpacing="12">
                 <!--La premier colonne prends la hauteur automatique dependamanent de son contenu
                 La deuxieme colonne prends la hauteur dependament de l'espace qui reste-->
                 <Grid.ColumnDefinitions>
@@ -33,5 +33,83 @@
                 <TextBlock FontSize="24" Grid.Column="0">Clients-Statistiques</TextBlock>
                 <Button Grid.Column="1" Click="VoirAjout">Ajouter</Button>
             </Grid>
+
+            <!--GridView Determine le style de notre Grid
+            Ici on veut que les clients proviennent du ClientViewModel et que
+            l'affichage commence a la rangée 1 colonne 1-->
+            <GridView
+                Grid.Row="1" Grid.Column="0"
+                ItemsSource="{x:Bind ViewModel.Clients , Mode=OneWay}">
+
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="GridViewItem">
+                        <!--Indique que chaque gridviewitem aura 7 pixel 
+                        a gauche et droite et 11 pixel de haut a bas-->
+                        <Setter Property="Margin" Value="7 11"/>
+                    </Style>
+                </GridView.ItemContainerStyle>
+
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="viewmodels:ClientViewModel">
+                        <Grid Width="300" BorderBrush="Black" BorderThickness="1">
+                            <StackPanel Orientation="Vertical" Height="100" VerticalAlignment="Bottom" Padding="15">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{x:Bind Id}"/>
+                                    <TextBlock Text=" - "/>
+                                    <TextBlock FontWeight="Bold" Text="{x:Bind Prenom}" Margin="5 0 0 0"/>
+                                    <TextBlock FontWeight="Bold" Text="{x:Bind Nom}" Margin="5 0 0 0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Client depuis : "/>
+                                    <TextBlock Text="{x:Bind DateToString(DateCreation, 'yyyy')}" Margin="5 0 0 0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Tarte Preferée: "/>
+                                    <TextBlock Text="{x:Bind TartePrefere}" Margin="5 0 0 0"/>
+                                </StackPanel>
+                                <TextBlock FontStyle="Italic" Text="Client Regulier" Visibility="{x:Bind EstClientRegulier}"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid MaximumRowsOrColumns="2" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+                
+            </GridView>
         </Grid>
+        
+        
+        <!--Formulaire d'ajout de client -->
+        <Grid x:Name="ajout" RowSpacing="12" Visibility="Collapsed">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock FontSize="24" Grid.Row="0">Nouveay Client</TextBlock>
+            <StackPanel Grid.Row="1" MaxWidth="300" HorizontalAlignment="Left">
+                <TextBox Header="Prénom" PlaceholderText="Prénom" Margin="0 10"
+                         x:Name="Prenom"
+                         x:Uid="InputValidationPage_Prenom"
+                         Text="{x:Bind ViewModel.NouveauClient.Prenom, Mode=TwoWay}"/>
+                <TextBox Header="Nom" PlaceholderText="Nom" Margin="0 10" Text="{x:Bind ViewModel.NouveauClient.Nom, Mode=TwoWay}"/>
+
+                <ComboBox Header="Tarte préférée" SelectedIndex="0" Width="auto" Margin="0 10" SelectedValue="{x:Bind ViewModel.NouveauClient.TartePrefere, Mode=TwoWay}">
+                    <x:String>Farlouche</x:String>
+                    <x:String>Fraise</x:String>
+                    <x:String>Pommes</x:String>
+                </ComboBox>
+                <CheckBox Margin="0 10"
+                          IsChecked="{x:Bind ViewModel.NouveauClient.EstClientRegulier, Mode=TwoWay}">
+                    Est un client regulier
+                </CheckBox>
+                <Button Click="AjouterClient" Margin="0 20">Ajouter ce client au systeme</Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
 </Page>
