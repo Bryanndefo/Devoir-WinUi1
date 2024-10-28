@@ -1,15 +1,12 @@
 ﻿using App2.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App2.Data
 {
     public class ClientDataProvider : IClientDataProvider
     {
-        public List<Client> GetClients() 
+        public List<Client> GetClients()
         {
             return new List<Client>()
             {

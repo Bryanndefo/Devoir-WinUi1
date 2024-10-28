@@ -2,18 +2,8 @@ using App2.Data;
 using App2.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -40,7 +30,6 @@ namespace App2.View
 
         private void VoirAjout(object sender, RoutedEventArgs e)
         {
-            ViewModel.AjouterClient();
             this.listeClients.Visibility = Visibility.Collapsed;
             this.ajout.Visibility = Visibility.Visible;
         }
@@ -50,6 +39,33 @@ namespace App2.View
             ViewModel.AjouterClient();
             this.listeClients.Visibility = Visibility.Visible;
             this.ajout.Visibility = Visibility.Collapsed;
+        }
+
+        private async void ConfirmerSuppressionClient()
+        {
+            ContentDialog dialogueSuppression = new ContentDialog
+            {
+                Title = "Supprimer le Client",
+                Content = $"Voulez-vous vraiment supprimer le client {ViewModel.ClientSelectionne.Prenom} {ViewModel.ClientSelectionne.Nom}?",
+                PrimaryButtonText = "Supprimer",
+                CloseButtonText = "Annuler"
+            };
+
+            if(ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 8))
+            {
+                dialogueSuppression.XamlRoot = this.XamlRoot;
+            }
+
+            ContentDialogResult result = await dialogueSuppression.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                ViewModel.SupprimerClientSelectionne();
+            }
+        }
+        private void SupprimerClient(object sender, RoutedEventArgs e)
+        {
+            ConfirmerSuppressionClient();
         }
     }
 }

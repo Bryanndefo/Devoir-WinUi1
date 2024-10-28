@@ -5,7 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:App2.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="using:App2.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ViewModelBase}"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:viewmodels="using:App2.ViewModels" 
+    d:DataContext="{d:DesignInstance Type=viewmodels:ViewModelBase}"
+    xmlns:validation="using:System.ComponentModel.DataAnnotations"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -34,55 +37,58 @@
                 <Button Grid.Column="1" Click="VoirAjout">Ajouter</Button>
             </Grid>
 
-            <!--GridView Determine le style de notre Grid
-            Ici on veut que les clients proviennent du ClientViewModel et que
-            l'affichage commence a la rangée 1 colonne 1-->
-            <GridView
-                Grid.Row="1" Grid.Column="0"
-                ItemsSource="{x:Bind ViewModel.Clients , Mode=OneWay}">
+            <!--StackPanel Determine le style de notre Grid Ici on veut que les clients proviennent du ClientViewModel et que l'affichage commence a la rangée 1 colonne 1-->
+            <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <GridView
+                ItemsSource="{x:Bind ViewModel.Clients , Mode=OneWay}"
+                SelectedItem="{x:Bind ViewModel.ClientSelectionne, Mode=TwoWay}">
 
-                <GridView.ItemContainerStyle>
-                    <Style TargetType="GridViewItem">
-                        <!--Indique que chaque gridviewitem aura 7 pixel 
-                        a gauche et droite et 11 pixel de haut a bas-->
-                        <Setter Property="Margin" Value="7 11"/>
-                    </Style>
-                </GridView.ItemContainerStyle>
 
-                <GridView.ItemTemplate>
-                    <DataTemplate x:DataType="viewmodels:ClientViewModel">
-                        <Grid Width="300" BorderBrush="Black" BorderThickness="1">
-                            <StackPanel Orientation="Vertical" Height="100" VerticalAlignment="Bottom" Padding="15">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{x:Bind Id}"/>
-                                    <TextBlock Text=" - "/>
-                                    <TextBlock FontWeight="Bold" Text="{x:Bind Prenom}" Margin="5 0 0 0"/>
-                                    <TextBlock FontWeight="Bold" Text="{x:Bind Nom}" Margin="5 0 0 0"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Client depuis : "/>
-                                    <TextBlock Text="{x:Bind DateToString(DateCreation, 'yyyy')}" Margin="5 0 0 0"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Tarte Preferée: "/>
-                                    <TextBlock Text="{x:Bind TartePrefere}" Margin="5 0 0 0"/>
-                                </StackPanel>
-                                <TextBlock FontStyle="Italic" Text="Client Regulier" Visibility="{x:Bind EstClientRegulier}"/>
-                            </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                </GridView.ItemTemplate>
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem">
+                            <!--Indique que chaque gridviewitem aura 7 pixel a gauche et droite et 11 pixel de haut a bas-->
+                            <Setter Property="Margin" Value="7 11"/>
+                        </Style>
+                    </GridView.ItemContainerStyle>
 
-                <GridView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <ItemsWrapGrid MaximumRowsOrColumns="2" Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </GridView.ItemsPanel>
-                
-            </GridView>
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="viewmodels:ClientViewModel">
+                            <Grid Width="300" BorderBrush="Black" BorderThickness="1">
+                                <StackPanel Orientation="Vertical" Height="100" VerticalAlignment="Bottom" Padding="15">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{x:Bind Id}"/>
+                                        <TextBlock Text=" - "/>
+                                        <TextBlock FontWeight="Bold" Text="{x:Bind Prenom}" Margin="5 0 0 0"/>
+                                        <TextBlock FontWeight="Bold" Text="{x:Bind Nom}" Margin="5 0 0 0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Client depuis : "/>
+                                        <TextBlock Text="{x:Bind DateToString(DateCreation, 'yyyy')}" Margin="5 0 0 0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Tarte Preferée: "/>
+                                        <TextBlock Text="{x:Bind TartePrefere}" Margin="5 0 0 0"/>
+                                    </StackPanel>
+                                    <TextBlock FontStyle="Italic" Text="Client Regulier" Visibility="{x:Bind EstClientRegulier}"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid MaximumRowsOrColumns="2" Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+
+                </GridView>
+                <Button Background="DarkRed" Foreground="WhiteSmoke" Visibility="{x:Bind ViewModel.ClientEstSelectionne, Mode=OneWay}"
+                    Click="SupprimerClient">Supprimer</Button>
+
+            </StackPanel>
         </Grid>
-        
-        
+
+
         <!--Formulaire d'ajout de client -->
         <Grid x:Name="ajout" RowSpacing="12" Visibility="Collapsed">
 
@@ -97,6 +103,11 @@
                          x:Name="Prenom"
                          x:Uid="InputValidationPage_Prenom"
                          Text="{x:Bind ViewModel.NouveauClient.Prenom, Mode=TwoWay}"/>
+                <ItemsView ItemsSource="{x:Bind ViewModel.NouveauClient.GetErrors('Prenom')}" Foreground="Coral">
+                    <ItemsView.Resources>
+                        <SolidColorBrush x:Key="ItemContainerPointerOverBackground" Color="Transparent"/>
+                    </ItemsView.Resources>
+                </ItemsView>
                 <TextBox Header="Nom" PlaceholderText="Nom" Margin="0 10" Text="{x:Bind ViewModel.NouveauClient.Nom, Mode=TwoWay}"/>
 
                 <ComboBox Header="Tarte préférée" SelectedIndex="0" Width="auto" Margin="0 10" SelectedValue="{x:Bind ViewModel.NouveauClient.TartePrefere, Mode=TwoWay}">

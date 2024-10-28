@@ -1,26 +1,40 @@
 ﻿using App2.Data;
+using App2.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using App2.Models;
-using System.Linq;    
-using System.Text;
-using System.Threading.Tasks;   
 
 namespace App2.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
         private IClientDataProvider _clientDataProvider;
+        private Random _random = new Random();
+        private ClientViewModel _clientselectionne;
         public ObservableCollection<ClientViewModel> Clients { get; }
         public ClientViewModel NouveauClient { get; }
+        public ClientViewModel? ClientSelectionne
+        {
+            get => _clientselectionne;
+            set
+            {
+                if (_clientselectionne != value)
+                {
+                    _clientselectionne = value;
+                    RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(ClientEstSelectionne));
+                }
+            }
+        }
+
+        public bool ClientEstSelectionne => ClientSelectionne != null;
+
 
         public MainViewModel(IClientDataProvider clientDataProvider)
         {
             _clientDataProvider = clientDataProvider;
             Clients = new ObservableCollection<ClientViewModel>();
-            Random rnd = new Random();
-            NouveauClient = new ClientViewModel(new Models.Client(rnd.Next(10000, 99999), "", ""));
+            NouveauClient = new ClientViewModel(new Models.Client(_random.Next(10000, 99999), "", ""));
         }
 
         public void ChargerClients()
@@ -41,6 +55,11 @@ namespace App2.ViewModels
         public void AjouterClient()
         {
             Clients.Add(NouveauClient);
+        }
+
+        public void SupprimerClientSelectionne()
+        {
+            Clients.Remove(ClientSelectionne);
         }
     }
 }

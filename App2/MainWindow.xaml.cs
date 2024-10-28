@@ -16,7 +16,7 @@ namespace App2
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        public MainViewModel ViewModel { get;}
+        public MainViewModel ViewModel { get; }
 
         public MainWindow()
         {
@@ -91,11 +91,6 @@ namespace App2
                 NavView.Header = ((NavigationViewItem)NavView.SelectedItem)?.
                                                         Content?.ToString();
             }
-        }
-
-        public static implicit operator MainWindow(MainViewModel v)
-        {
-            throw new NotImplementedException();
         }
     }
 }

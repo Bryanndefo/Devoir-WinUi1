@@ -1,19 +1,20 @@
 ﻿using App2.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace App2.ViewModels
 {
-    public class ClientViewModel : ViewModelBase
+    public class ClientViewModel : ViewModelValidable
     {
         public Client _client;
 
         public ClientViewModel(Client client)
         {
+            ObservableCollection<ValidationResult> listeVide = new ObservableCollection<ValidationResult>();
             _client = client;
+            _errors.Add("Prenom", listeVide);
+
         }
 
         public int Id
@@ -21,12 +22,18 @@ namespace App2.ViewModels
             get => _client.Id;
         }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Le prenom est requis")]
+        [MinLength(2, ErrorMessage = " Le prenom doit comprendre au moins 2 caracteres.")]
+        [MaxLength(254, ErrorMessage = "Le prenom doit comprendre moins de 255 caracteres")]
+        [DeniedValues(["Bob", "Ginette"], ErrorMessage = "Soyez Creatif")]
+        [RegularExpression(@"[A-Z].*", ErrorMessage = "Le prenom doit commencer par une majuscule.")]
+
         public string Prenom
         {
             get => _client.Prenom;
             set
             {
-                if (_client.Prenom != value)
+                if (_client.Prenom != value & Validate(value))
                 {
                     _client.Prenom = value;
                     RaisePropertyChanged();
@@ -81,6 +88,11 @@ namespace App2.ViewModels
         public string DateToString(DateOnly date, string format)
         {
             return Utilities.DateToString(date, format);
+        }
+
+        public new ObservableCollection<ValidationResult> GetErrors(string propriete)
+        {
+            return (ObservableCollection<ValidationResult>)base.GetErrors(propriete);
         }
     }
 }
