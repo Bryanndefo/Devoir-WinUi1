@@ -6,11 +6,10 @@
     <RootNamespace>App2</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <Platforms>x64</Platforms>
-    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
-    <PublishProfile>win-$(Platform).pubxml</PublishProfile>
+    <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
-	<UseRidGraph>true=""></UseRidGraph>
+	<UseRidGraph>true</UseRidGraph>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="View\Clients.xaml" />
