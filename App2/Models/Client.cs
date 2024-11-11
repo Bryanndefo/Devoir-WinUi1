@@ -4,11 +4,11 @@ namespace App2.Models
 {
     public class Client
     {
-        public int Id { get; }
+        public int Id { get; set; }
         public string Prenom { get; set; }
         public string Nom { get; set; }
         public bool EstClientRegulier { get; set; }
-        public DateOnly DateCreation { get; }
+        public DateOnly DateCreation { get; set; }
         public string TartePreferee { get; set; }
         public Client(int id, string prenom = "Prénom", string nom = "Nom",
             bool estClientRegulier = false, DateOnly dateCreation = new DateOnly(), string tartePreferee = "Farlouche")

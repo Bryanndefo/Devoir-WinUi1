@@ -19,7 +19,7 @@ namespace App2.View
         public Clients()
         {
             this.InitializeComponent();
-            ViewModel = new MainViewModel(new ClientDataProvider());
+            ViewModel = new MainViewModel(new DBClientDataProvider());
             root.Loaded += Root_Loaded;
         }
 

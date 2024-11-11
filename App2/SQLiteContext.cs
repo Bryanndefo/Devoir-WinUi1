@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using App2.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace App2;
 
 public partial class SQLiteContext : DbContext
 {
+    public DbSet<Client> Clients { get; set; }
     public SQLiteContext()
     {
     }
