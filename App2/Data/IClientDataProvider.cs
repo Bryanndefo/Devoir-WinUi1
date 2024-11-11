@@ -6,5 +6,7 @@ namespace App2.Data;
 public interface IClientDataProvider
 {
     List<Client> GetClients();
+    void AjoutClient(Client client);
+    void RetirerClient(Client client);
 }
 

@@ -28,7 +28,7 @@ public partial class SQLiteContext : DbContext
         delegate (string text) { Debug.WriteLine(text); },
         [DbLoggerCategory.Database.Command.Name],
         Microsoft.Extensions.Logging.LogLevel.Information
-        );
+        ).EnableSensitiveDataLogging();
             
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -55,10 +55,12 @@ namespace App2.ViewModels
         public void AjouterClient()
         {
             Clients.Add(NouveauClient);
+            _clientDataProvider.AjoutClient(NouveauClient.Client);
         }
 
         public void SupprimerClientSelectionne()
         {
+            _clientDataProvider.RetirerClient(ClientSelectionne.Client);
             Clients.Remove(ClientSelectionne);
         }
     }

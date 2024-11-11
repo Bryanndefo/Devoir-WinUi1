@@ -17,6 +17,11 @@ namespace App2.ViewModels
 
         }
 
+        public Client Client
+        {
+            get => _client; 
+        }
+
         public int Id
         {
             get => _client.Id;
